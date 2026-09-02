@@ -4,24 +4,25 @@ from mcp import Client
 
 
 async def main():
-   async with Client("https://germproof-viscous-unlearned.ngrok-free.dev/mcp/") as client:
+    async with Client(
+        "https://germproof-viscous-unlearned.ngrok-free.dev/mcp/"
+    ) as client:
 
         result = await client.list_tools()
 
         print("AVAILABLE TOOLS:")
-
         print(result)
 
-        print("\nSEARCH RESULT:")
+        print("\nOPEN APPLICATION RESULT:")
 
-        search_result = await client.call_tool(
-            "search_web",
+        application_result = await client.call_tool(
+            "open_application",
             {
-                "query": "What is the current USD to INR exchange rate?"
+                "application": "Task Manager"
             },
         )
 
-        print(search_result)
+        print(application_result)
 
 
 if __name__ == "__main__":

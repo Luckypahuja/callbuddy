@@ -1,5 +1,6 @@
 from mcp.server import MCPServer
 from mcp.server.transport_security import TransportSecuritySettings
+import subprocess
 
 from services.realtime_service import RealtimeService
 
@@ -34,6 +35,66 @@ async def search_web(query: str) -> str:
         answer += "\n\nSources:\n" + "\n".join(sources[:5])
 
     return answer
+
+@mcp.tool(
+    name="open_application",
+    description=(
+        "Open a Windows application on the user's computer. "
+        "Use this when the user asks to open an application such as "
+        "Task Manager, VS Code, Chrome, Edge, Notepad, Calculator, "
+        "or File Explorer."
+    ),
+)
+async def open_application(application: str) -> str:
+
+    app = application.lower().strip()
+
+    applications = {
+        "task manager": "taskmgr",
+        "taskmanager": "taskmgr",
+
+        "vs code": "code",
+        "visual studio code": "code",
+        "vscode": "code",
+
+        "chrome": "chrome",
+        "google chrome": "chrome",
+
+        "edge": "msedge",
+        "microsoft edge": "msedge",
+
+        "notepad": "notepad",
+
+        "calculator": "calc",
+        "calc": "calc",
+
+        "file explorer": "explorer",
+        "explorer": "explorer",
+    }
+
+    command = applications.get(app)
+
+    if command is None:
+        return (
+            f"I can't open '{application}' yet. "
+            "This application is not supported."
+        )
+
+    try:
+        subprocess.Popen(
+            [command],
+            shell=False,
+        )
+
+        return f"Opened {application}."
+
+    except Exception as exc:
+        print(
+            f"Failed to open {application}: "
+            f"{type(exc).__name__}: {exc}"
+        )
+
+        return f"I was unable to open {application}."
 
 transport_security = TransportSecuritySettings(
     allowed_hosts=[
