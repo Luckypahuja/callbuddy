@@ -1,0 +1,2 @@
+const labels = { idle: "Ready to talk", connecting: "Connecting securely", listening: "Listening…", speaking: "Calling Buddy is speaking…", processing: "Thinking…", error: "Connection needs attention", ended: "Conversation ended" };
+export default function VoiceOrb({ state = "idle" }) { return <div className={`voice-orb-wrap ${state}`} aria-live="polite"><div className="voice-orb"><span /><span /><span /></div><p>{labels[state] || labels.idle}</p></div>; }

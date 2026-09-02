@@ -1,0 +1,2 @@
+const links = [["/", "Home"], ["/calling-buddy", "Calling Buddy"], ["/ai-doctor", "AI Doctor"], ["/sign-seeker", "Sign Seeker"]];
+export default function Navbar({ currentPath, navigate }) { return <header className="navbar"><button className="brand" onClick={() => navigate("/")}><span className="brand-mark">E</span><span>EchoSphere</span></button><nav>{links.map(([path, label]) => <button key={path} className={currentPath === path ? "active" : ""} onClick={() => navigate(path)}>{label}</button>)}</nav></header>; }
