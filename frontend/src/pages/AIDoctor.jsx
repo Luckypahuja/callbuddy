@@ -1,2 +1,34 @@
-import { useEffect, useState } from "react"; import { getAIDoctorStatus } from "../services/api";
-export default function AIDoctor({ navigate }) { const [status, setStatus] = useState("Checking availability…"); useEffect(() => { getAIDoctorStatus().then(x => setStatus(x.status === "coming_soon" ? "Coming soon" : "Unavailable")).catch(() => setStatus("Backend unavailable")); }, []); return <main className="page placeholder-page"><button className="back-button" onClick={() => navigate("/")}>← Back to agents</button><p className="eyebrow">AI DOCTOR · {status}</p><h1>Support, with clear boundaries.</h1><p className="lead-notice">AI Doctor provides general, non-clinical health information and support. It does not diagnose conditions or replace a healthcare professional.</p><div className="coming-soon"><span>✦</span><div><h2>Coming soon</h2><p>This area is intentionally being developed with hackathon safety requirements in mind.</p></div></div></main>; }
+export default function AIDoctor({ navigate }) {
+  return (
+    <main className="page placeholder-page">
+      <button
+        className="back-button"
+        onClick={() => navigate("/")}
+      >
+        ← Back to agents
+      </button>
+
+      <p className="eyebrow">AI DOCTOR</p>
+
+      <h1>
+        AI Doctor <em>Coming Soon.</em>
+      </h1>
+
+      <p className="lead-notice">
+        AI-powered visual health assistance is currently under development.
+      </p>
+
+      <div className="coming-soon">
+        <span>✦</span>
+
+        <div>
+          <h2>Coming soon</h2>
+          <p>
+            This feature is being developed for a future version of
+            EchoSphere.
+          </p>
+        </div>
+      </div>
+    </main>
+  );
+}

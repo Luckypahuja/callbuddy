@@ -10,7 +10,7 @@ from schemas import CaseCreate, CaseResponse
 
 
 
-from routes.ai_doctor import router as ai_doctor_router
+#from routes.ai_doctor import router as ai_doctor_router
 from routes.calling_buddy import router as calling_buddy_router
 from routes.sign_seeker import router as sign_seeker_router
 
@@ -53,7 +53,7 @@ app.add_middleware(
 
 
 app.include_router(calling_buddy_router)
-app.include_router(ai_doctor_router)
+#app.include_router(ai_doctor_router)
 app.include_router(sign_seeker_router)
 
 
